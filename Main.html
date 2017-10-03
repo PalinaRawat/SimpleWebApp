@@ -1,0 +1,325 @@
+<html>
+<head>
+	<style>
+		#alert {
+			border: none;
+    		outline:none;
+    		min-width: 100%;
+		}
+		.close {
+	    	color: red;
+	    	float: right;
+	    	font-size: 28px;
+	    	font-weight: bold;
+		}
+		.close:hover,
+		.close:focus {
+	    	color: black;
+	    	text-decoration: none;
+	    	cursor: pointer;
+		}
+		#lblEmployeeID {
+			left: 50px;
+			top: 50px;
+		}
+
+		#txtEmployee {
+			left: 150px;
+			top: 50px;
+		}
+
+		#lblHoursWorked {
+			margin-left: 120px;
+			top: 50px;
+		}
+
+		#txtHoursWorked {
+			left: 450px;
+			top: 50px;
+		}
+
+		#lblDateWorked {
+			left: 50px;
+			top: 100px;
+		}
+
+		#txtDateWorked {
+			left: 150px;
+			top: 100px;
+		}
+
+		#lblDescription {
+			left: 50px;
+		}
+
+		#txtDescription {
+			left: 50px;
+			width: 600px;
+			height: 100px;
+		}
+
+		#chkBillable {
+			margin-left: 150px;
+			top: 100px;
+		}
+
+		#lblBillable {
+			margin-left: 5px;
+			top: 100px;
+		}
+
+		#btnSave {
+            width: 100px;
+		}
+
+		#btnDelete {
+            width: 100px;
+		}
+
+		.modal {
+			display: none;
+			position: fixed; /* Stay in place */
+		    z-index: 1; /* Sit on top */
+		    padding-top: 100px; /* Location of the box */
+		    left: 0;
+		    top: 0;
+		    width: 100%; /* Full width */
+		    height: 100%; /* Full height */
+		    overflow: auto; /* Enable scroll if needed */
+		    background-color: rgb(0,0,0); /* Fallback color */
+		    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+		.modal-content {
+		    background-color: #fefefe;
+		    margin: auto;
+		    padding: 20px;
+		    border: 1px solid #888;
+		    width: 80%;
+		}
+
+		.divHeader {
+			position: relative;
+			margin-bottom: 30px;
+		}
+
+		#lblHeader {
+			font-size: 30px;
+		}
+
+		#txtEmployeeID {
+			position: relative;
+			left: 10px;
+		}
+
+		#txtPassword {
+			position: relative;
+			left: 10px;
+		}
+
+		.divEmployeeID {
+			position: relative;
+			margin-bottom: 10px;
+		}
+
+		.divPassword {
+			position: relative;
+			margin-bottom: 10px;
+		}
+		.divSignIn {
+			position: relative;
+			margin-bottom: 10px;
+		}
+		.divRemember {
+			position: relative;
+			margin-bottom: 10px;
+		}
+
+		#lblFilterHead {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			font-size: 30px;
+		}
+
+		.divContainer {
+			background-color: #D3D3D3;
+			position: absolute;
+			top: 70px;
+			width: 500px;
+		}
+
+		.divFirstRow {
+			margin-top: 20px;
+		}
+
+		.divSecondRow {
+			margin-top: 20px;
+		}
+
+		.divThirdRow {
+			margin-top: 20px;
+		}
+
+		#btnAddNew {
+			position: absolute;
+			left: 10px;
+			top: 180px;
+			margin-top: 20px;
+		}
+		
+        #lblEntries {
+			font-size: 30px;
+			display: inline-block;
+			width: 400px;
+		}
+
+        #divEntries {
+			position: absolute;
+			top: 150px;
+			left: 10px;
+			margin-top: 100px;
+		}
+		
+		#divEntriesList {
+			background-color: #D3D3D3;
+			overflow-y: scroll; 
+			height: 400px;
+			width: 1000px;
+		}
+
+		#divEntriesHead {
+			margin-top: 20px;
+		}
+
+		.divEntriesCol1 {
+			display: inline-block;
+			width: 100px;
+		}
+
+		.divEntriesCol2 {
+			display: inline-block;
+			width: 100px;
+		}
+
+		.divEntriesCol3 {
+			display: inline-block;
+			width: 100px;
+		}
+
+		.divEntriesCol4 {
+			display: inline-block;
+			width: 550px;
+		}
+
+        .divEntriesRow {
+			position: relative;
+			width: 1000px;
+		}
+
+	</style>
+	<script language="javascript" text="text/javascript" src="Main.js"></script>
+    <script language="javascript" text="text/javascript" src="Shared.js"></script>
+    <script language="javascript" text="text/javascript" src="SignIn.js"></script>
+    <script language="javascript" text="text/javascript" src="Edit.js"></script>
+
+</head>
+<body onload="body_onload()">
+	<div id="signInModal" class="modal">
+		<div class="modal-content">
+			<div class="divLogin" align="center">
+				<div class="divHeader">
+					<label id="lblHeader">Time Log Sign In</label>
+				</div>
+				<div class="divEmployeeID">
+					<label id="lblUsername">Employee ID:</label>
+					<input type="text" id="txtEmployeeID" />
+				</div>
+
+				<div class="divPassword">
+					<label id="lblPassword">Password:</label>
+					<input type="password" id="txtPassword" />
+				</div>
+
+				<div class="divSignIn">
+					<button id="btnSignIn">Sign in</button>
+				</div>
+				<div class="divRemember">
+					<input type="checkbox" id="chkRemember"/>
+					<label id="lblRemember">Remember Employee ID</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="editModal" class="modal">
+		<div class="modal-content">
+			<span id="signIn_close" class="close">&times;</span>
+			<ul>
+				<label id="lblEmployeeID">Employee ID:</label>
+				<input type="text" id="txtEmployee"/>
+				<label id="lblHoursWorked">Hours Worked:</label>
+				<input type="text" id="txtHoursWorked"/>
+			</ul>
+			<ul>
+				<label id="lblDateWorked">Date Worked:</label>
+				<input type="date" id="txtDateWorked"/>
+				<input type="checkbox" id="chkBillable"/>
+				<label id="lblBillable">Billable?</label>
+			</ul>
+			<ul>
+				<label id="lblDescription">Description:</label>
+				<textarea id="txtDescription"></textarea>
+					<input type="button" id="btnSave" value="Save"/>
+					<input type="button" id="btnDelete" value="Delete"/>
+			<ul>
+		</div>
+	</div>
+	<div id="alertModal" class="modal">
+		<div class="modal-content">
+		<span id="alert_close" class="close">&times;</span>
+			<input type="text" id="alert"> </input>
+		</div>
+	</div>
+	<div id="deleteModal" class="modal">
+		<div class="modal-content">
+		<span id="delete_close" class="close">&times;</span>
+			Are you sure you want to delete this entry?
+		<input type="button" id="btn_yes" value="Yes"/>
+		<input type="button" id="btn_no" value="No"	 />
+		</div>
+	</div>
+	<div class="divFilter">
+		<label id="lblFilterHead">Filters</label>
+		<div class="divContainer">
+			<div class="divFirstRow">
+				<label id="lblDescContains">Description contains: </label>
+				<input type="text" id="txtDescContains">
+				<button id="btnRefresh">Refresh</button>
+			</div>
+			<div class="divSecondRow">
+				<label id="lblDateFrom">Date from:</label>
+				<input type="date" id="txtDateFrom">
+				<label id="lblDateThrough">through:</label>
+				<input type="date" id="txtDateThrough">
+			</div>
+			<div class="divThirdRow">
+				<input type="checkbox" id="chkShowCurrEmp"/>
+				<label id="lblShowCurrEmp">Show current employee only</label> 
+			</div>
+		</div>
+		<button id="btnAddNew">Add New</button>
+	</div>
+	<div id="divEntries">
+		<label id="lblEntries">Time Log Entries</label>
+		<label id="lblTotalHoursWorked"></label>
+		<div id="divEntriesHead">
+			<label id="employee_1" class="divEntriesColl">Employee ID</label>
+			<label id="date_2" class="divEntriesCol2">Date</label>
+			<label id="hours_3" class="divEntriesCol3">Hours</label>
+			<label id="description_4" class="divEntriesCol4">Description</label>
+		</div>
+		<div id="divEntriesList">
+		</div>
+	</div>
+
+</body>
+</html>

@@ -29,8 +29,6 @@ function edit(){
     getEntries();
 
     if (gMode === "edit") {
-    	console.log("here1");
-    
         gIndex = localStorage.getItem("index", -1);
         if (tryParse(gIndex, 0) === false) {
         	console.log("2");
@@ -62,8 +60,8 @@ function edit(){
 
 	if (gMode === "edit") {
 	    gEntry = gEntries[gIndex];
-	    console.log("here6");
 	    txtEmployeeID.value  = gEntry.EmployeeID;
+	    console.log(txtEmployeeID.value);
 	    txtHoursWorked.value = gEntry.HoursWorked;
 	    txtDateWorked.value  = gEntry.DateWorked;
         chkBillable.checked  = gEntry.Billable;
